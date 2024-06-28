@@ -13,7 +13,6 @@ const TodoList = ({ todos }: Props) => {
       {todos.map((item) => {
         return <div key={item.id}>{item.name}</div>;
       })}
-      <p>Todos</p>
     </div>
   );
 };
