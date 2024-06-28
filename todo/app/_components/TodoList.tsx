@@ -1,9 +1,21 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
-type Props = {};
+type Props = {
+  todos: any;
+};
 
-const TodoList = (props: Props) => {
-  return <div>TodoList</div>;
+const TodoList = ({ todos }: Props) => {
+  console.log(todos);
+
+  return (
+    <div>
+      {todos.map((item) => {
+        return <div key={item.id}>{item.name}</div>;
+      })}
+      <p>Todos</p>
+    </div>
+  );
 };
 
 export default TodoList;
