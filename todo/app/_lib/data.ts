@@ -40,3 +40,26 @@ export async function updateTodoItem(data: {
     throw err;
   }
 }
+
+export async function deleteTodoItem(data: { id: number }) {
+  try {
+    const response = await fetch("http://localhost:3001/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete todo item");
+    }
+
+    const responseData = await response.json();
+
+    return responseData;
+  } catch (error) {
+    console.error("Error deleting todo item:", error);
+    throw error;
+  }
+}

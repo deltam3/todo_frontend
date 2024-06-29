@@ -7,7 +7,6 @@ const AddTodo = () => {
 
   const submitHandler = async (e: any) => {
     e.preventDefault();
-    console.log("log");
     try {
       const todoItem = await createTodoItem({ name: name });
       setName("");

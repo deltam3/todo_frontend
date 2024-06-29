@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { fetchTodoData, updateTodoItem } from "../_lib/data";
+import { fetchTodoData, updateTodoItem, deleteTodoItem } from "../_lib/data";
 import { TodoItemType } from "../page";
 
 const TodoList = ({ todos }: any) => {
@@ -22,6 +22,14 @@ const TodoList = ({ todos }: any) => {
     }
   };
 
+  const setDeleteHandler = async (item: TodoItemType) => {
+    try {
+      const deletedItem = await deleteTodoItem({ id: item.id });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <ul>
       {data.map((item: TodoItemType) => (
@@ -30,6 +38,7 @@ const TodoList = ({ todos }: any) => {
           <p>{item.is_done ? "DONE" : "NOT DONE"}</p>
 
           <button onClick={() => setDoneHandler(item)}>MARK AS DONE</button>
+          <button onClick={() => setDeleteHandler(item)}>DELETE</button>
         </li>
       ))}
     </ul>
