@@ -1,19 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchTodoData } from "../_lib/data";
+import { TodoItemType } from "../page";
 
-type Props = {
-  todos: any;
-};
-
-const TodoList = ({ todos }: Props) => {
-  console.log(todos);
+const TodoList = ({ todos }: any) => {
+  const { data, error, isFetched } = useQuery({
+    queryKey: ["todos"],
+    queryFn: fetchTodoData,
+    retry: true,
+  });
 
   return (
-    <div>
-      {todos.map((item) => {
-        return <div key={item.id}>{item.name}</div>;
-      })}
-    </div>
+    <ul>
+      {data.map((item: TodoItemType) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
   );
 };
 

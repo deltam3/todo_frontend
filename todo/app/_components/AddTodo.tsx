@@ -1,9 +1,34 @@
-import React from "react";
+"use client";
+import { createTodoItem } from "../_lib/data";
+import { useState } from "react";
 
-type Props = {};
+const AddTodo = () => {
+  const [name, setName] = useState<string>("PLACEHOLDER");
 
-const AddTodo = (props: Props) => {
-  return <div>AddTodo</div>;
+  const submitHandler = async (e: any) => {
+    e.preventDefault();
+    console.log("log");
+    try {
+      const todoItem = await createTodoItem({ name: name });
+      setName("");
+    } catch (error) {
+      console.error("error");
+    }
+  };
+
+  const onChangeHandler = (e: any) => {
+    setName(e.target.value);
+  };
+
+  return (
+    <form onSubmit={submitHandler}>
+      <label>ADD TODO</label>
+      <input value={name} onChange={onChangeHandler} />
+      <button type="submit" onClick={submitHandler}>
+        Add Todo
+      </button>
+    </form>
+  );
 };
 
 export default AddTodo;
